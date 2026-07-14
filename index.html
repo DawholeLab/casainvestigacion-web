@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Casa de Investigación — Investigación Estratégica · Social · Política · Mercados</title>
+<meta name="description" content="La Casa de Investigación: oficina de investigación cualitativa y cuantitativa con presencia en Iberoamérica. Un puente entre los palacios y las calles: no solo recolectamos datos, construimos entendimiento.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26292c;        /* casi negro cálido */
+    --slate:#46586a;      /* gris pizarra azulado del manual */
+    --gray:#7c8288;
+    --line:#dcdedf;
+    --paper:#fafaf9;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Archivo',sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-weight:300}
+
+  .kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gray);font-weight:500}
+  .slash{color:var(--gray);font-weight:300}
+  h2{font-weight:600;font-size:1.6rem;letter-spacing:.01em;margin:.6rem 0 1.4rem}
+  section{padding:5.5rem 1.5rem}
+  .wrap{max-width:960px;margin:0 auto}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;background:rgba(250,250,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
+  .nav-in{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.5rem}
+  .nav-links a{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--ink);margin-left:1.6rem;font-weight:500}
+  .nav-links a:hover{color:var(--slate)}
+  .logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--ink)}
+  .logo svg{height:26px;width:auto}
+  .logo-word{font-size:1rem;letter-spacing:.015em}
+  .logo-word b{font-weight:700;color:var(--slate)}
+  .logo-word span{color:var(--gray);font-weight:300;letter-spacing:.04em}
+
+  /* HERO */
+  header{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem 1.5rem 4rem;background:var(--white);position:relative;overflow:hidden}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.55) 55%,var(--paper) 100%)}
+  header > *:not(.hero-video):not(.hero-veil){position:relative;z-index:2}
+  header .iso{height:74px;margin-bottom:2rem}
+  h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:600;letter-spacing:.015em}
+  h1 b{font-weight:700;color:var(--slate)}
+  h1 .light{font-weight:300;color:var(--gray);letter-spacing:.05em}
+  .hero-tag{font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--slate);margin-top:1.1rem;font-weight:500}
+  .hero-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.12rem;color:var(--gray);max-width:34rem;margin-top:3rem}
+  .hero-quote cite{display:block;font-style:normal;font-family:'Archivo';font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;margin-top:.9rem}
+
+  /* MANIFIESTO */
+  .manifesto{background:var(--paper);text-align:center}
+  .manifesto p.big{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.3rem,3vw,1.85rem);line-height:1.5;max-width:44rem;margin:0 auto}
+  .manifesto p.big b{font-weight:400;color:var(--slate)}
+
+  /* MIRADA */
+  .mirada{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  .cols p+p{margin-top:1rem}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+
+  /* EXPERIENCIA */
+  .exp-list{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem;list-style:none}
+  .exp-list li{padding:1.05rem 0;border-bottom:1px solid var(--line);font-weight:400;font-size:.95rem}
+  @media(max-width:720px){.exp-list{grid-template-columns:1fr}}
+
+  /* DISCIPLINAS */
+  .disc{background:var(--slate);color:#e8eaec;text-align:center}
+  .disc .kicker{color:#aeb9c2}
+  .disc-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 0;margin-top:2.2rem;font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500}
+  .disc-row span{padding:0 1.4rem;border-right:1px solid rgba(255,255,255,.25)}
+  .disc-row span:last-child{border-right:none}
+
+  /* EQUIPOS */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  .team-card{background:var(--white);border:1px solid var(--line);padding:1.8rem}
+  .team-card h3{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);margin-bottom:.7rem;font-weight:600}
+  .team-card p{font-size:.9rem;color:#4c5257}
+  @media(max-width:720px){.team-grid{grid-template-columns:1fr}}
+
+  /* PRESENCIA */
+  .presence{background:var(--white);border-top:1px solid var(--line);text-align:center}
+  .countries{font-size:.82rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gray);margin-top:1.6rem;line-height:2.4}
+
+  /* CONTACTO */
+  .contact{background:var(--paper);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+  .contact-card h3{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--slate);margin-bottom:.6rem;font-weight:600}
+  .contact-card p{font-size:.9rem}
+  .contact-card a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .contact-card a:hover{color:var(--slate);border-color:var(--slate)}
+  .contact-general{margin-top:3rem;text-align:center;font-size:.95rem}
+  .contact-general a{color:var(--slate);text-decoration:none;font-weight:500}
+  @media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
+
+  footer{background:var(--ink);color:#9aa0a5;text-align:center;padding:2.2rem 1.5rem;font-size:.75rem;letter-spacing:.12em}
+  footer b{color:#d6d8da;font-weight:500}
+
+  /* Revelado al hacer scroll */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.visible{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* Cifras */
+  .stats{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+  .stat-num{font-size:clamp(2rem,5vw,3.2rem);font-weight:600;color:var(--slate);letter-spacing:.02em}
+  .stat-label{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray);margin-top:.4rem;font-weight:500}
+  @media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* Cuaderno */
+  .cuaderno-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+  .cuaderno-card{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .cuaderno-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(38,41,44,.08)}
+  .cuaderno-media{aspect-ratio:16/9;background:linear-gradient(135deg,#eceded,#dfe2e4);display:flex;align-items:center;justify-content:center;color:var(--gray)}
+  .cuaderno-media iframe{width:100%;height:100%;border:0}
+  .cuaderno-body{padding:1.4rem;display:flex;flex-direction:column;flex:1}
+  .cuaderno-tag{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--slate);font-weight:600}
+  .cuaderno-body h3{font-size:1.02rem;font-weight:600;margin:.6rem 0 .5rem}
+  .cuaderno-body p{font-size:.88rem;color:#4c5257;flex:1}
+  @media(max-width:760px){.cuaderno-grid{grid-template-columns:1fr}}
+
+  .client-logos img{width:84px;height:84px;border-radius:50%;object-fit:cover;transition:transform .25s;box-shadow:0 4px 14px rgba(38,41,44,.12)}
+  .client-logos img:hover{transform:scale(1.12)}
+  .client-logos.figuras img{width:72px;height:72px}
+
+  /* Redes sociales */
+  .social{display:flex;justify-content:center;gap:1.4rem;margin-top:1.4rem}
+  .social a{color:#9aa0a5;transition:color .2s}
+  .social a:hover{color:#fff}
+  .social svg{width:20px;height:20px;fill:currentColor}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top">
+      <img src="assets/isotipo_gris.png" alt="" style="height:28px;width:auto">
+      <span class="logo-word"><b>La Casa</b> <span>de Investigación</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#mirada">Mirada</a><a href="#experiencia">Experiencia</a><a href="#equipos">Equipos</a><a href="#board">Consejo</a><a href="#cuaderno">Cuaderno</a><a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero_poster.jpg">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-veil"></div>
+  <img class="iso" src="assets/isotipo_gris.png" alt="La Casa de Investigación" style="width:auto">
+  <h1><b>La Casa</b> <span class="light">de Investigación</span></h1>
+  <p class="hero-tag">Investigación estratégica <span class="slash">/</span> Social <span class="slash">/</span> Política <span class="slash">/</span> Mercados</p>
+  <blockquote class="hero-quote">
+    «La atención es la forma más rara y más pura de la generosidad.»
+    <cite>— Simone Weil</cite>
+  </blockquote>
+</header>
+
+<section class="manifesto">
+  <div class="wrap">
+    <p class="big">La realidad rara vez habla con una sola voz. Entre las instituciones y la ciudadanía, entre las organizaciones y las personas, entre las decisiones y sus consecuencias, existen distancias que no pueden resolverse únicamente con información.</p>
+    <p class="big" style="margin-top:1.6rem"><b>Investigar es comprender esas distancias.</b></p>
+    <div style="max-width:44rem;margin:2.4rem auto 0;text-align:left">
+      <p>En La Casa de Investigación estudiamos cómo las personas perciben, interpretan, sienten, recuerdan y actúan. Escuchamos antes de concluir. Contrastamos antes de afirmar. Buscamos comprender antes que confirmar nuestras propias hipótesis.</p>
+      <p style="margin-top:1rem">Creemos que toda decisión importante merece una comprensión rigurosa de la realidad humana que pretende transformar.</p>
+      <p style="margin-top:1rem">No producimos datos para llenar informes. Producimos conocimiento para reducir incertidumbre, ampliar la comprensión y mejorar la calidad de las decisiones.</p>
+    </div>
+    <p class="big" style="margin-top:2.4rem;font-size:1.25rem"><b>Comprender es la condición previa para actuar con inteligencia.</b></p>
+  </div>
+</section>
+
+<section class="mirada" id="mirada">
+  <div class="wrap">
+    <p class="kicker">Nuestra mirada</p>
+    <h2>La investigación como restitución de la realidad</h2>
+    <div class="cols">
+      <div>
+        <p>Toda organización construye, con el tiempo, una representación de la realidad. Esa representación orienta sus decisiones, pero también puede terminar alejándola de la experiencia concreta de las personas.</p>
+        <p><b>La investigación comienza allí.</b></p>
+        <p>Investigar es suspender las propias certezas para volver a comprender el mundo desde quienes lo viven. Es reconstruir cómo ciudadanos, clientes, consumidores, usuarios o audiencias perciben, interpretan y dan sentido a aquello con lo que interactúan.</p>
+      </div>
+      <div>
+        <p>No buscamos únicamente opiniones. Buscamos comprender los procesos psicológicos, culturales, sociales y sistémicos que las hacen posibles.</p>
+        <p>Por eso no entregamos simplemente datos. Restituimos una comprensión más profunda de la realidad, capaz de reducir incertidumbre, desafiar supuestos y ampliar la calidad de las decisiones.</p>
+        <p>Para lograrlo hemos desarrollado metodologías propias que integran la psicología, la sociología, la antropología y el pensamiento sistémico en un único marco analítico.</p>
+        <p><b>Porque toda buena decisión comienza con una mejor comprensión de la realidad.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap">
+    <p class="kicker">Experiencia</p>
+    <h2>Más de dos décadas investigando fenómenos complejos en los ámbitos político, social y corporativo</h2>
+    <p style="margin-bottom:1.5rem">Nuestra experiencia incluye, entre otros:</p>
+    <ul class="exp-list">
+      <li>Arquitectura y segmentación de audiencias mediante metodologías propias</li>
+      <li>Comportamiento electoral, opinión pública y comunicación política</li>
+      <li>Comunicación gubernamental y legitimidad institucional</li>
+      <li>Estrategia corporativa, reputación y posicionamiento de marcas</li>
+      <li>Estudios culturales, inmersiones etnográficas y construcción de significado</li>
+      <li>Sistemas de creencias, paradigmas culturales y marcos de interpretación</li>
+      <li>Prospectiva y análisis sistémico de escenarios sociales, políticos y económicos</li>
+      <li>Investigación para la gestión de crisis y contextos de alta incertidumbre</li>
+      <li>Integración de investigación cualitativa, cuantitativa y metodologías híbridas</li>
+    </ul>
+    <p style="margin-top:2rem;font-style:italic;color:var(--gray)">Cada investigación amplía nuestro conocimiento sobre un fenómeno particular; todas, en conjunto, profundizan nuestra comprensión de la condición humana.</p>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Campañas</div></div>
+      <div><div class="stat-num" data-count="20" data-suffix="+">0</div><div class="stat-label">Procesos presidenciales</div></div>
+      <div><div class="stat-num" data-count="2" data-suffix="+">0</div><div class="stat-label">Décadas de investigación</div></div>
+      <div><div class="stat-num" data-count="4" data-suffix="">0</div><div class="stat-label">Continentes</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="disc">
+  <div class="wrap">
+    <p class="kicker">Abordaje interdisciplinario</p>
+    <p style="max-width:42rem;margin:1.4rem auto 0;color:#c9cfd4">Ninguna disciplina, por sí sola, basta para comprender la complejidad humana. Por eso articulamos perspectivas provenientes de múltiples campos en un único marco analítico.</p>
+    <div class="disc-row" style="margin-top:2rem">
+      <span>Antropología</span><span>Psicología</span><span>Psiquiatría</span><span>Sociología</span><span>Filosofía</span><span>Comunicación</span>
+    </div>
+    <div class="disc-row" style="margin-top:1rem">
+      <span>Ciencias complejas</span><span>Física</span><span>Matemáticas</span><span>Biología</span><span>Teoría de sistemas</span>
+    </div>
+  </div>
+</section>
+
+<section id="equipos">
+  <div class="wrap">
+    <p class="kicker">Los equipos</p>
+    <h2>Cada investigación requiere un equipo distinto. La excelencia consiste en saber configurarlo.</h2>
+    <p style="max-width:44rem;margin-bottom:2rem">No creemos en estructuras rígidas ni en equipos permanentes para cualquier desafío. Cada proyecto exige una combinación específica de experiencia disciplinaria, conocimiento sectorial y trayectoria internacional. Por ello conformamos equipos a medida, integrando perfiles complementarios según la naturaleza de la investigación.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <h3>Dirección de proyecto</h3>
+        <p>Psicólogos, sociólogos, antropólogos y especialistas en comunicación con más de quince años liderando investigaciones complejas en múltiples países y acompañando procesos políticos, institucionales y corporativos de alta exigencia.</p>
+      </div>
+      <div class="team-card">
+        <h3>Análisis senior</h3>
+        <p>Investigadores con formación doctoral y trayectoria académica en universidades como Berkeley, Cambridge, MIT, Universidad de Barcelona, Complutense de Madrid, Rey Juan Carlos, UNAM, Universidad Católica de Chile, University of Surrey e Iberoamericana, entre otras.</p>
+      </div>
+      <div class="team-card">
+        <h3>Trabajo de campo</h3>
+        <p>Moderadores, etnógrafos e investigadores sociales con amplia experiencia en investigación cualitativa y formación en antropología, psicología, sociología y comunicación, provenientes de instituciones como la ENAH, UNAM, UAM, Universidad de Chile, Universidad de Buenos Aires e Iberoamericana.</p>
+      </div>
+      <div class="team-card">
+        <h3>Análisis especializado</h3>
+        <p>Profesionales provenientes de las ciencias sociales, el derecho, la comunicación y la gestión estratégica, incorporados según las necesidades específicas de cada proyecto.</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem;font-weight:500">La calidad de una investigación depende tanto de su metodología como de las personas que la hacen posible.</p>
+  </div>
+</section>
+
+<section id="board" style="background:var(--paper);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">Consejo Directivo</p>
+    <h2>Una dirección compartida por especialistas con trayectorias complementarias</h2>
+    <p style="max-width:44rem;margin-bottom:2rem">La Casa de Investigación es dirigida por un equipo que integra experiencia en psicología, antropología, comunicación, tecnología, periodismo, derecho e investigación estratégica. La diversidad disciplinaria no es un atributo organizacional: es una condición para comprender fenómenos complejos desde perspectivas múltiples.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem">
+      <div class="team-card" style="text-align:center">
+        <img class="board-photo" src="assets/matias.jpg" alt="Matías Gálvez Fernández" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block">
+        <h3 style="letter-spacing:.1em">Matías Gálvez Fernández</h3>
+        <p><b>Director General</b><br><em>Psicólogo.</em> Responsable de la dirección estratégica de la firma y de los proyectos para Norteamérica y España.</p>
+      </div>
+      <div class="team-card" style="text-align:center">
+        <img class="board-photo" src="assets/rafaella.jpg" alt="Rafaella Real" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block">
+        <h3 style="letter-spacing:.1em">Rafaella Real</h3>
+        <p><b>Directora de Proyectos</b><br><em>Antropóloga.</em> Coordinadora de proyectos para México y Centroamérica.</p>
+      </div>
+      <div class="team-card" style="text-align:center">
+        <img class="board-photo" src="assets/emiliano.jpg" alt="Emiliano Fernández Milki" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block">
+        <h3 style="letter-spacing:.1em">Emiliano Fernández Milki</h3>
+        <p><b>Director de Proyectos</b><br><em>Ingeniero de sistemas y desarrollo tecnológico.</em> Coordinador de proyectos para el Cono Sur.</p>
+      </div>
+      <div class="team-card" style="text-align:center">
+        <img class="board-photo" src="assets/salvador.jpg" alt="Salvador Giménez" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block">
+        <h3 style="letter-spacing:.1em">Salvador Giménez</h3>
+        <p><b>Coordinador Internacional</b><br><em>Periodista.</em> Responsable de proyectos internacionales en Hispanoamérica.</p>
+      </div>
+      <div class="team-card" style="text-align:center">
+        <img class="board-photo" src="assets/daniel.jpg" alt="Daniel Lucas Coll" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 1.1rem;display:block">
+        <h3 style="letter-spacing:.1em">Daniel Lucas Coll</h3>
+        <p><b>Coordinador Regional</b><br><em>Abogado.</em> Responsable de proyectos para África y el Archipiélago Canario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" style="background:var(--white);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">Confían en nosotros</p>
+    <h2>Colaboraciones en proyectos de alto valor estratégico</h2>
+    <div class="client-logos" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.4rem;margin-top:1.5rem">
+      <img src="assets/clients/gob_chile.jpg" alt="Gobierno de Chile" title="Gobierno de Chile">
+      <img src="assets/clients/gob_rd.jpg" alt="Gobierno de la República Dominicana" title="Gobierno de la República Dominicana">
+      <img src="assets/clients/gob_mexico.jpg" alt="Gobierno Federal de México" title="Gobierno Federal de México">
+      <img src="assets/clients/pres_ecuador.jpg" alt="Presidencia de la República del Ecuador" title="Presidencia de la República del Ecuador">
+      <img src="assets/clients/democrats.jpg" alt="Partido Demócrata (EE. UU.)" title="Partido Demócrata (EE. UU.)">
+      <img src="assets/clients/psoe.jpg" alt="PSOE" title="PSOE">
+      <img src="assets/clients/morena.jpg" alt="Morena" title="Morena">
+      <img src="assets/clients/pan.jpg" alt="PAN" title="PAN">
+      <img src="assets/clients/pri.jpg" alt="PRI" title="PRI">
+      <img src="assets/clients/frente_amplio.jpg" alt="Frente Amplio" title="Frente Amplio">
+      <img src="assets/clients/pro.jpg" alt="PRO" title="PRO">
+      <img src="assets/clients/prm.jpg" alt="PRM" title="PRM">
+      <img src="assets/clients/pepsico.jpg" alt="PepsiCo" title="PepsiCo">
+      <img src="assets/clients/bimbo.jpg" alt="Bimbo" title="Bimbo">
+      <img src="assets/clients/heineken.jpg" alt="Heineken" title="Heineken">
+      <img src="assets/clients/microsoft.jpg" alt="Microsoft" title="Microsoft">
+      <img src="assets/clients/mtv.jpg" alt="MTV" title="MTV">
+      <img src="assets/clients/discovery.jpg" alt="Discovery" title="Discovery">
+      <img src="assets/clients/qualcomm.jpg" alt="Qualcomm" title="Qualcomm">
+      <img src="assets/clients/bat.jpg" alt="British American Tobacco" title="British American Tobacco">
+      <img src="assets/clients/asocana.png" alt="Asocaña — Sector Azucarero Colombiano" title="Asocaña — Sector Azucarero Colombiano">
+    </div>
+    <p class="kicker" style="margin-top:3.5rem">Algunas de nuestras colaboraciones</p>
+    <div class="client-logos figuras" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.1rem;margin-top:1.4rem">
+      <img src="assets/figuras/f19_1.jpg" alt=""><img src="assets/figuras/f19_2.jpg" alt=""><img src="assets/figuras/f19_3.jpg" alt=""><img src="assets/figuras/f19_4.jpg" alt=""><img src="assets/figuras/f19_5.jpg" alt=""><img src="assets/figuras/f19_6.jpg" alt=""><img src="assets/figuras/f19_7.jpg" alt=""><img src="assets/figuras/f19_8.jpg" alt=""><img src="assets/figuras/f19_9.jpg" alt=""><img src="assets/figuras/f19_10.jpg" alt=""><img src="assets/figuras/f19_11.jpg" alt=""><img src="assets/figuras/f20_1.jpg" alt=""><img src="assets/figuras/f20_2.jpg" alt=""><img src="assets/figuras/f20_3.jpg" alt=""><img src="assets/figuras/f20_4.jpg" alt=""><img src="assets/figuras/f20_5.jpg" alt=""><img src="assets/figuras/f20_6.jpg" alt=""><img src="assets/figuras/f20_7.jpg" alt=""><img src="assets/figuras/f20_8.jpg" alt=""><img src="assets/figuras/f20_9.jpg" alt=""><img src="assets/figuras/f20_10.jpg" alt=""><img src="assets/figuras/f20_11.jpg" alt=""><img src="assets/figuras/f20_12.jpg" alt=""><img src="assets/figuras/f20_13.jpg" alt=""><img src="assets/figuras/f20_14.jpg" alt=""><img src="assets/figuras/f20_15.jpg" alt=""><img src="assets/figuras/f20_16.jpg" alt=""><img src="assets/figuras/f20_17.jpg" alt=""><img src="assets/figuras/f20_18.jpg" alt=""><img src="assets/figuras/f20_19.jpg" alt=""><img src="assets/figuras/f20_20.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="reconocimientos" style="background:var(--paper);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">Reconocimientos</p>
+    <h2>Investigación reconocida internacionalmente</h2>
+    <p style="max-width:44rem;margin-bottom:2rem">El trabajo de La Casa de Investigación ha sido distinguido en los principales certámenes internacionales de investigación y comunicación política.</p>
+    <div class="team-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="team-card">
+        <img src="assets/napolitan.jpg" alt="Washington Academy of Political Arts and Sciences" style="height:64px;border-radius:6px;margin-bottom:1rem">
+        <h3>Napolitan Awards</h3>
+        <p>Best Regional Research, Presidential Campaign — Washington DC, 2021.</p>
+        <p style="margin-top:.5rem">Best Research, Presidential Campaign — Washington DC, 2022.</p>
+      </div>
+      <div class="team-card">
+        <img src="assets/polaris.jpg" alt="Polaris Awards" style="height:64px;border-radius:6px;margin-bottom:1rem">
+        <h3>Polaris Awards</h3>
+        <p>Best Research, Opposition Presidential Campaign — London, 2024.</p>
+        <p style="margin-top:.5rem">Dos Polaris Awards por excelencia internacional en Political Communication &amp; Public Affairs — London, 2026.</p>
+      </div>
+    </div>
+    <p class="kicker" style="margin-top:3rem">Miembros de</p>
+    <div id="member-logos" style="display:flex;align-items:center;gap:2rem;margin-top:1.2rem;flex-wrap:wrap">
+      <span title="International Association of Political Consultants">
+        <svg width="150" height="64" viewBox="0 0 300 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IAPC">
+          <g stroke="#b5922f" stroke-width="7" stroke-linecap="round" fill="none">
+            <path d="M22 78 L22 46 M13 76 L13 56 M31 74 L31 52"/>
+            <path d="M62 70 L62 30 M53 68 L53 40 M71 66 L71 36"/>
+            <path d="M100 64 L100 40 M92 64 L92 48"/>
+          </g>
+          <path d="M6 92 Q90 52 180 74" stroke="#b5922f" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <text x="108" y="86" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="62" fill="#1d2d44">IAPC</text>
+          <text x="108" y="106" font-family="Arial,Helvetica,sans-serif" font-size="12.5" letter-spacing="1" fill="#1d2d44">INTERNATIONAL ASSOCIATION</text>
+          <text x="108" y="121" font-family="Arial,Helvetica,sans-serif" font-size="12.5" letter-spacing="1" fill="#1d2d44">OF POLITICAL CONSULTANTS</text>
+        </svg>
+      </span>
+      <span title="European Association of Political Consultants">
+        <svg width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EAPC">
+          <rect width="100" height="100" rx="4" fill="#2b5cb8"/>
+          <g fill="#ffffff">
+            <path id="stl" d="M0,-7 L1.9,-2.2 L7,-2.2 L2.9,0.9 L4.4,5.8 L0,2.9 L-4.4,5.8 L-2.9,0.9 L-7,-2.2 L-1.9,-2.2 Z" transform="translate(23,18)"/>
+            <use href="#stl" transform="translate(18,0)"/><use href="#stl" transform="translate(36,0)"/><use href="#stl" transform="translate(54,0)"/>
+            <use href="#stl" transform="translate(0,19)"/><use href="#stl" transform="translate(18,19)"/><use href="#stl" transform="translate(36,19)"/><use href="#stl" transform="translate(54,19)"/>
+            <use href="#stl" transform="translate(0,38)"/><use href="#stl" transform="translate(18,38)"/><use href="#stl" transform="translate(36,38)"/><use href="#stl" transform="translate(54,38)"/>
+            <text x="50" y="88" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="26">eapc</text>
+          </g>
+        </svg>
+      </span>
+    </div>
+    <p class="kicker" style="margin-top:2rem">Con el reconocimiento de</p>
+    <div id="recognition-logos" style="display:flex;align-items:center;gap:1.6rem;margin-top:1.2rem;flex-wrap:wrap">
+      <span title="Asociación Latinoamericana de Consultores Políticos" style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 10px;display:inline-flex">
+        <svg width="86" height="80" viewBox="0 0 200 186" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ALACOP">
+          <rect x="28" y="4" width="70" height="76" fill="#f5e400" stroke="#cc1f1a" stroke-width="5"/>
+          <text x="63" y="60" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="44" fill="#cc1f1a">ALa</text>
+          <rect x="102" y="4" width="66" height="62" fill="#cc1f1a"/>
+          <g transform="translate(135,35)"><circle r="26" fill="#111"/><g stroke="#fff" stroke-width="2.5" fill="none"><circle r="26"/><ellipse rx="12" ry="26"/><line x1="-26" y1="0" x2="26" y2="0"/><path d="M-22 -12 Q0 -4 22 -12 M-22 12 Q0 4 22 12"/></g></g>
+          <rect x="28" y="84" width="66" height="62" fill="#cc1f1a"/>
+          <g transform="translate(61,115)"><circle r="26" fill="#111"/><g stroke="#fff" stroke-width="2.5" fill="none"><circle r="26"/><ellipse rx="12" ry="26"/><line x1="-26" y1="0" x2="26" y2="0"/><path d="M-22 -12 Q0 -4 22 -12 M-22 12 Q0 4 22 12"/></g></g>
+          <rect x="98" y="70" width="70" height="76" fill="#f5e400" stroke="#cc1f1a" stroke-width="5"/>
+          <text x="133" y="128" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="44" fill="#222">CoP</text>
+          <text x="100" y="166" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#111">ASOCIACION LATINOAMERICANA</text>
+          <text x="100" y="182" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#111">DE CONSULTORES POLITICOS</text>
+        </svg>
+      </span>
+      <span title="Association of Political Consultants – Africa" style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;display:inline-flex">
+        <svg width="170" height="64" viewBox="0 0 620 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="APCA">
+          <text x="10" y="150" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="150" fill="#1a1a1a" letter-spacing="4">APCA</text>
+          <g transform="translate(455,2) scale(1.05)">
+            <clipPath id="afr2"><path d="M52 2 Q78 -4 92 10 L128 26 Q146 44 136 70 L144 92 Q134 140 102 168 Q86 184 78 160 L64 118 Q48 90 52 60 Q44 30 52 2 Z"/></clipPath>
+            <g clip-path="url(#afr2)">
+              <polygon points="0,0 70,0 20,90 0,90" fill="#f2b705"/>
+              <polygon points="74,0 150,0 150,40 40,120 24,94" fill="#e5322d"/>
+              <polygon points="150,44 46,124 62,150 150,86" fill="#1fa650"/>
+              <polygon points="150,90 66,154 82,180 150,132" fill="#33aadd"/>
+              <polygon points="150,136 86,184 100,214 150,190" fill="#1a1a1a"/>
+              <polygon points="150,194 102,218 112,240 150,240" fill="#f5e400"/>
+            </g>
+          </g>
+          <text x="10" y="192" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="27" fill="#1a1a1a">ASSOCIATION OF POLITICAL CONSULTANTS - AFRICA</text>
+          <text x="10" y="226" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="27" fill="#1a1a1a">ASSOCIATION DES CONSULTANTS POLITIQUES D'AFRIQUE</text>
+        </svg>
+      </span>
+      <span title="Clube Associativo dos Profissionais de Marketing Político" style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;display:inline-flex">
+        <svg width="170" height="36" viewBox="0 0 620 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CAMP">
+          <g font-family="Georgia,'Times New Roman',serif" font-size="130" font-weight="400">
+            <text x="0" y="112" fill="#5bb7e0">C</text>
+            <text x="95" y="112" fill="#e84a7f">A</text>
+            <text x="195" y="112" fill="#f2b705">M</text>
+            <text x="325" y="112" fill="#1fa650">P</text>
+          </g>
+          <g font-family="'Arial Narrow',Arial,sans-serif" font-size="28" font-weight="bold" fill="#1a1a1a" letter-spacing="1">
+            <text x="415" y="32">CLUBE ASSOCIATIVO</text>
+            <text x="415" y="62">DOS PROFISSIONAIS</text>
+            <text x="415" y="92">DE MARKETING</text>
+            <text x="415" y="122">POLÍTICO</text>
+          </g>
+        </svg>
+      </span>
+      <span title="Canadian Council of Campaign Consultants" style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px 14px;display:inline-flex">
+        <svg width="190" height="42" viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Canadian Council of Campaign Consultants">
+          <text x="200" y="42" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" fill="#111" letter-spacing="2">CANADIAN COUNCIL OF</text>
+          <text x="200" y="80" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" fill="#111" letter-spacing="2">CAMPAIGN CONSULTANTS</text>
+          <g transform="translate(408,50) scale(1.05)" fill="#c49a5a">
+            <path d="M0 -40 L0 44 L4 44 L4 30 L18 33 L15 24 L34 8 L27 5 L31 -8 L18 -4 L15 -12 L4 -1 L4 -40 Z"/>
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="cuaderno" style="background:var(--paper);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker">Cuaderno</p>
+    <h2>Ideas, conversaciones y hallazgos</h2>
+    <div class="cuaderno-grid">
+      <article class="cuaderno-card">
+        <div class="cuaderno-media">
+          <!-- Sustituir por: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> o player.vimeo.com -->
+          <svg width="46" height="46" viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="22" stroke="currentColor"/><path d="M18 15 L32 23 L18 31 Z" fill="currentColor"/></svg>
+        </div>
+        <div class="cuaderno-body">
+          <span class="cuaderno-tag">Video</span>
+          <h3>Próximamente</h3>
+          <p>Conversaciones, conferencias y apariciones de La Casa. Aquí incrustaremos videos de YouTube o Vimeo.</p>
+        </div>
+      </article>
+      <article class="cuaderno-card">
+        <div class="cuaderno-media" style="background:linear-gradient(135deg,#46586a,#5d7186)"></div>
+        <div class="cuaderno-body">
+          <span class="cuaderno-tag">Artículo</span>
+          <h3>Próximamente</h3>
+          <p>Ensayos y análisis del equipo: método, coyuntura y los temas que investigamos.</p>
+        </div>
+      </article>
+      <article class="cuaderno-card">
+        <div class="cuaderno-media" style="background:linear-gradient(135deg,#dfe2e4,#c9d0d6)"></div>
+        <div class="cuaderno-body">
+          <span class="cuaderno-tag">Enlaces</span>
+          <h3>Próximamente</h3>
+          <p>Lecturas, referencias y recursos que nos parecen imprescindibles.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="presence" style="position:relative;overflow:hidden">
+  <img src="assets/world_poly_presencia.png" alt="" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:94%;max-width:1150px;opacity:.55;pointer-events:none">
+  <div class="wrap" style="position:relative;z-index:1">
+    <p class="kicker">Presencia</p>
+    <h2 style="font-family:'Fraunces',serif;font-weight:300;font-style:italic">La investigación es un llamado. Siempre respondemos.</h2>
+    <p style="max-width:44rem;margin:0 auto">Durante más de dos décadas hemos desarrollado investigaciones cualitativas y cuantitativas en América, Europa, África y Asia, acompañando procesos políticos, institucionales y corporativos en contextos culturales profundamente diversos.</p>
+    <p class="countries" style="margin-top:2rem">Norte, Centro y Sudamérica · Reino Unido · España · Portugal · Francia · Norte y Occidente de África · Asia Meridional</p>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap">
+    <p class="kicker">Contacto</p>
+    <h2>Conversemos</h2>
+    <p class="contact-general" style="margin-top:1.5rem;font-size:1.1rem"><a href="mailto:contacto@casainvestigacion.com">contacto@casainvestigacion.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <p><b>La Casa de Investigación</b> · by Dawhole &nbsp;·&nbsp; © 2026 Todos los derechos reservados &nbsp;·&nbsp; <a href="https://dawhole.com" style="color:#9aa0a5">dawhole.com</a></p>
+  <div class="social">
+    <a href="#" aria-label="LinkedIn" title="LinkedIn (próximamente)"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.31h4.56V23H.22V8.31zM8.34 8.31h4.37v2h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v8.06h-4.55v-7.15c0-1.7-.03-3.9-2.38-3.9-2.38 0-2.74 1.86-2.74 3.78V23H8.34V8.31z"/></svg></a>
+    <a href="#" aria-label="Instagram" title="Instagram (próximamente)"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.48 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.15A3.99 3.99 0 1 1 15.99 12 4 4 0 0 1 12 15.99zm7.85-10.4a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z"/></svg></a>
+    <a href="#" aria-label="X" title="X (próximamente)"><svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26L22.83 21.75h-6.66l-5.22-6.82-5.97 6.82H1.66l7.73-8.84L1.17 2.25h6.83l4.72 6.23 5.52-6.23zm-1.16 17.52h1.83L7.08 4.12H5.12l11.96 15.65z"/></svg></a>
+    <a href="#" aria-label="YouTube" title="YouTube (próximamente)"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Revelado suave al hacer scroll
+  document.querySelectorAll('section .wrap, header .hero-quote').forEach(function(el){ el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Contadores
+  var done = false;
+  var so = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !done){
+        done = true;
+        document.querySelectorAll('.stat-num').forEach(function(n){
+          var target = +n.dataset.count, suf = n.dataset.suffix||'', t0 = null;
+          function step(t){ if(!t0) t0 = t; var p = Math.min((t-t0)/1400,1);
+            n.textContent = Math.round(target*(1-Math.pow(1-p,3))) + suf;
+            if(p<1) requestAnimationFrame(step); }
+          requestAnimationFrame(step);
+        });
+      }
+    });
+  },{threshold:.4});
+  var s = document.querySelector('.stats'); if(s) so.observe(s);
+})();
+</script>
+
+</body>
+</html>
