@@ -128,6 +128,11 @@
   .client-logos img:hover{transform:scale(1.12)}
   .client-logos.figuras img{width:72px;height:72px}
 
+  /* Marca de agua del equipo (imagen IA, presencia sugerida) */
+  #equipos{position:relative;overflow:hidden}
+  #equipos::before{content:"";position:absolute;inset:0;background:url("assets/equipo_wm.jpg") center/cover no-repeat;opacity:.07;pointer-events:none}
+  #equipos .wrap{position:relative;z-index:1}
+
   /* Grano de papel */
   body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
 
