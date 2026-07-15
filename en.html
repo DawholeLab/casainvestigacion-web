@@ -33,6 +33,17 @@
   .nav-in{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.5rem}
   .nav-links a{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--ink);margin-left:1.6rem;font-weight:500}
   .nav-links a:hover{color:var(--slate)}
+  .nav-links{display:flex;align-items:center}
+  .nav-burger{position:relative;margin-left:1.4rem}
+  .burger-btn{background:none;border:0;cursor:pointer;padding:.5rem 0 .5rem .5rem;display:flex;flex-direction:column;gap:5px}
+  .nav-menu{position:absolute;right:-.5rem;top:100%;padding-top:.9rem;display:none;min-width:230px;z-index:60}
+  .nav-burger:hover .nav-menu,.nav-burger:focus-within .nav-menu,.nav-burger.open .nav-menu{display:block}
+  .nav-menu a{display:block;padding:.6rem 1.5rem;margin-left:0!important}
+  .burger-btn span{display:block;width:22px;height:2px;background:var(--slate);transition:background .2s}
+  .nav-burger:hover .burger-btn span,.nav-burger:focus-within .burger-btn span{background:var(--ink)}
+  .nav-menu-in{background:#fff;border:1px solid var(--line);padding:.7rem 0;box-shadow:0 20px 45px rgba(20,30,45,.12)}
+  .nav-menu a:hover{background:rgba(20,30,45,.04)}
+
   .logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--ink)}
   .logo svg{height:26px;width:auto}
   .logo-word{font-size:1rem;letter-spacing:.015em}
@@ -174,7 +185,18 @@
       <span class="logo-word"><b>La Casa</b> <span>de Investigación</span></span>
     </a>
     <div class="nav-links">
-      <a href="#mirada">Approach</a><a href="#experiencia">Experience</a><a href="#equipos">Teams</a><a href="#board">Board</a><a href="#cuaderno">Notebook</a><a href="#contacto">Contact</a><span class="lang-switch" style="margin-left:1.6rem;font-size:.72rem;letter-spacing:.15em;white-space:nowrap;display:inline-flex;align-items:center"><a href="index.html" style="margin-left:0;color:var(--gray)">ES</a><span style="color:var(--gray)"> | </span><b style="color:var(--slate)">EN</b></span>
+      <span class="lang-switch" style="margin-left:0;font-size:.72rem;letter-spacing:.15em;white-space:nowrap;display:inline-flex;align-items:center"><a href="index.html" style="margin-left:0;color:var(--gray)">ES</a><span style="color:var(--gray)"> | </span><b style="color:var(--slate)">EN</b></span>
+      <div class="nav-burger">
+        <button class="burger-btn" aria-label="Menu" aria-haspopup="true"><span></span><span></span><span></span></button>
+        <div class="nav-menu"><div class="nav-menu-in">
+        <a href="#mirada">Approach</a>
+        <a href="#experiencia">Experience</a>
+        <a href="#equipos">Teams</a>
+        <a href="#board">Board</a>
+        <a href="#cuaderno">Notebook</a>
+        <a href="#contacto">Contact</a>
+        </div></div>
+      </div>
     </div>
   </div>
 </nav>
@@ -289,8 +311,8 @@
         <p>Moderators, ethnographers and social researchers with advanced training in anthropology, psychology, sociology and communication, and years of craft spent listening to people in profoundly diverse cultural contexts.</p>
       </div>
       <div class="team-card">
-        <h3>Specialized analysis</h3>
-        <p>Professionals from the social sciences, law, communication and strategic management, brought in according to the specific needs of each project.</p>
+        <h3>Interdisciplinary analysis</h3>
+        <p>Professionals from mathematics, physics, philosophy, the social sciences, law, communication and strategic management, brought in according to the specific needs of each project.</p>
       </div>
     </div>
     <p style="margin-top:2rem;font-weight:500">The quality of a study depends as much on its methodology as on the people who make it possible.</p>
@@ -581,5 +603,6 @@
 })();
 </script>
 
+<script>document.querySelectorAll('.burger-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();b.parentElement.classList.toggle('open');});});document.addEventListener('click',function(){document.querySelectorAll('.nav-burger.open').forEach(function(n){n.classList.remove('open');});});</script>
 </body>
 </html>
