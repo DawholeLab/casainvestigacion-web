@@ -128,6 +128,31 @@
   .client-logos img:hover{transform:scale(1.12)}
   .client-logos.figuras img{width:72px;height:72px}
 
+  /* Grano de papel */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* Cursor propio (solo puntero fino) */
+  #cursor{position:fixed;top:0;left:0;width:12px;height:12px;border:1.5px solid var(--slate);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,opacity .3s;opacity:0;mix-blend-mode:multiply}
+  #cursor.on{opacity:.85}
+  #cursor.big{width:42px;height:42px}
+  @media(pointer:coarse){#cursor{display:none}}
+
+  /* Interludio oscuro: Reconocimientos */
+  #reconocimientos{background:var(--ink)!important;border-top:none!important}
+  #reconocimientos .kicker{color:#8e9cab}
+  #reconocimientos h2{color:#f0f1f2}
+  #reconocimientos > .wrap > p{color:#b8bec4}
+  #reconocimientos .team-card{background:#31353a;border-color:#45494e}
+  #reconocimientos .team-card h3{color:#aeb9c2}
+  #reconocimientos .team-card p{color:#c9cfd4}
+  #reconocimientos [id="member-logos"] + .kicker, #reconocimientos .kicker[style]{color:#8e9cab}
+  #reconocimientos #member-logos > span, #reconocimientos #recognition-logos > span{background:#fff;border:none;border-radius:6px;padding:8px 12px;display:inline-flex}
+
+  /* Mapa que respira */
+  @keyframes breathe{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(1)}50%{opacity:.62;transform:translate(-50%,-50%) scale(1.012)}}
+  .presence img[src*="world_poly"]{animation:breathe 9s ease-in-out infinite}
+  @media(prefers-reduced-motion:reduce){.presence img[src*="world_poly"]{animation:none}}
+
   /* Redes sociales */
   .social{display:flex;justify-content:center;gap:1.4rem;margin-top:1.4rem}
   .social a{color:#9aa0a5;transition:color .2s}
@@ -510,8 +535,20 @@
   </div>
 </footer>
 
+<div id="cursor" aria-hidden="true"></div>
 <script>
 (function(){
+  // Cursor propio
+  if (matchMedia('(pointer:fine)').matches){
+    var c = document.getElementById('cursor');
+    addEventListener('mousemove', function(e){
+      c.classList.add('on');
+      c.style.top = e.clientY+'px'; c.style.left = e.clientX+'px';
+      var t = e.target.closest('a,button,.cuaderno-card,.client-logos img');
+      c.classList.toggle('big', !!t);
+    });
+    document.addEventListener('mouseleave', function(){ c.classList.remove('on'); });
+  }
   // Revelado suave al hacer scroll
   document.querySelectorAll('section .wrap, header .hero-quote').forEach(function(el){ el.classList.add('reveal'); });
   var io = new IntersectionObserver(function(entries){
